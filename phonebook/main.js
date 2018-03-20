@@ -1,8 +1,8 @@
 /*Begin dependencies*/
 
 var http = require('http')
-var contacts = []
-var contactID = 0
+var contacts = [{id: 0, first: 'Dylan', last: 'Bailey', email: 'dylan@dylby.me'}
+];
 var fs = require('fs');
 var readline = require('readline');
 var promisify = require('util').promisify;
@@ -99,7 +99,7 @@ var darkEntry = function () {
         })
 };
 
-var allEntry = function () {
+ var allEntry = function () {
     readFile(phoneBook)
         .then(function (data) {
             var stringData = data.toString();
@@ -108,7 +108,6 @@ var allEntry = function () {
         .then(function () {
             startApp();
         });
-};
 
 var server = http.createServer(function (request, response) {
     var urlID = Number(request.url.split('/contacts/')[1])
@@ -122,9 +121,8 @@ var server = http.createServer(function (request, response) {
             });
             request.on('end', function () {
                 var contact = JSON.parse(body);
-                contact.id = ++contactID;
                 contacts.push(contact);
-                response.end('IT'S GOOD!!!!!!!);
+                response.end('ITs good');
             })
         }
     } else if (Number.isInteger(urlID)) {
@@ -164,6 +162,13 @@ var server = http.createServer(function (request, response) {
     }
 });
 
+var paths = [
+    { method: 'DELETE', path: '/contacts/', handler: darkEntry },
+    { method: 'GET', path: '/contacts/', handler: allEntry},
+    { method: 'POST', path: '/contacts/', hander: nuEntry},
+    { method: 'GET', PATH: '/contacts/', handler: itsAnEntry},
+];
+
 server.listen(3000);
 
 
@@ -188,3 +193,4 @@ var startApp = function () {
 };
 
 startApp();
+ };
