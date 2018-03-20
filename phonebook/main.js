@@ -66,8 +66,8 @@ var nuEntry = function () {
         })
         .then(function () {
             startApp();
-        })
-}
+        });
+};
 
 var darkEntry = function () {
     var phoneList;
@@ -124,7 +124,7 @@ var server = http.createServer(function (request, response) {
                 var contact = JSON.parse(body);
                 contact.id = ++contactID;
                 contacts.push(contact);
-                response.end('Entry Added');
+                response.end('IT'S GOOD!!!!!!!);
             })
         }
     } else if (Number.isInteger(urlID)) {
@@ -145,7 +145,7 @@ var server = http.createServer(function (request, response) {
                 contacts.forEach(function (entry, i) {
                     if (entry.id === urlID) {
                         contacts.splice(i, 1, updateContact)
-                        response.end('Entry Updated');
+                        response.end('UPDATED');
                     }
                 })
             })
@@ -153,14 +153,14 @@ var server = http.createServer(function (request, response) {
             contacts.forEach(function (entry, i) {
                 if (entry.id === urlID) {
                     contacts.splice(i, 1)
-                    response.end('Entry Deleted')
+                    response.end('BALEETED')
                 }
             })
         } else if (request.method === 'POST') {
-            response.end('Unable to create new entry in this index')
+            response.end('ERROR!')
         }
     } else {
-        response.end('Unable to communicate')
+        response.end('ERROR! TO COMMUNICATE!')
     }
 });
 
